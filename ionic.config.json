@@ -1,5 +1,7 @@
 {
   "name": "PokeApi",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
