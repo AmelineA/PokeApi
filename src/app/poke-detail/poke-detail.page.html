@@ -7,4 +7,7 @@
 <ion-content>
   <label>id : </label><p>{{ pokemon.id }}</p>
   <label>nom : </label><p>{{ pokemon.name }}</p>
+  <label>favori : </label><p>{{ pokemon.favori }}</p>
+  <ion-button (click)="setFavorite(pokemon)">Mettre en favori</ion-button>
+  <ion-img [src]="pokemon.picture"></ion-img>
 </ion-content>

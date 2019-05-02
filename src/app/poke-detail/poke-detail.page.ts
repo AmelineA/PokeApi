@@ -3,6 +3,7 @@ import { Pokemon } from '../pokemon';
 import { ApiService } from '../api.service';
 import { validateConfig } from '@angular/router/src/config';
 import { Storage } from '@ionic/storage';
+import { TransferDataService } from '../transfer-data.service';
 
 @Component({
   selector: 'app-poke-detail',
@@ -11,22 +12,24 @@ import { Storage } from '@ionic/storage';
 })
 export class PokeDetailPage implements OnInit {
 
-  pokemon = new Pokemon();
+  private pokemon = new Pokemon();
 
-  constructor(private storage: Storage, private apiService : ApiService) { 
+  constructor(private storage: Storage, private apiService : ApiService, private data : TransferDataService) { 
   }
 
   ngOnInit() {
-    this.getPoke();
+    this.pokemon = this.data.getData();
+    
   }
 
-  getPoke(){
-    this.apiService.getPoke().subscribe((val)=>{
-      let result : any =val;
-      this.pokemon.name = result.results[0].name;
-      this.pokemon.url = result.results[0].url;
-      this.pokemon.favori = false;
-      console.log(this.pokemon);
-    })
+
+  setFavorite(pokemon : Pokemon){
+    if(pokemon.favori == true){
+      pokemon.favori = false;
+    }
+    else{
+      pokemon.favori = true;
+      
+    }
   }
 }
