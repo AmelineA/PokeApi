@@ -7,7 +7,7 @@ import { ApiService } from '../api.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-    
+      
 
   /**
    *
