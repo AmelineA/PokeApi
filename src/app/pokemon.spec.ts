@@ -1,7 +1,7 @@
-import { Pokemmon } from './pokemmon';
+import { Pokemon } from './pokemon';
 
 describe('Pokemmon', () => {
   it('should create an instance', () => {
-    expect(new Pokemmon()).toBeTruthy();
+    expect(new Pokemon()).toBeTruthy();
   });
 });

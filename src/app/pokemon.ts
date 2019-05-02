@@ -1,4 +1,4 @@
-export class Pokemmon {
+export class Pokemon {
     id: number;
     name: string;
 
