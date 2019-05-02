@@ -25,7 +25,7 @@ export class HomePage {
   //recuperer le détails d'un pokemon et renvoyer vers la page correspondante
   getPokemonDetails(pokemon: Pokemon){
         this.transferData.setData(pokemon);
-        console.log(pokemon);
+        console.log(this.transferData.getData());
         this.router.navigate(["/poke-detail"]);
   }
   
@@ -69,5 +69,11 @@ export class HomePage {
         this.getPokemonDetails(pokemon);
       }
     })
+  }
+
+  gotoDetail(pokemon : Pokemon){
+    this.transferData.setData(pokemon);
+    console.log(this.transferData.getData());
+    this.router.navigate(['/poke-detail']);
   }
 }
