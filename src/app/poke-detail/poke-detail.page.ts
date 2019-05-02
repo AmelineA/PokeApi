@@ -21,7 +21,7 @@ export class PokeDetailPage implements OnInit {
   }
 
   getPoke(){
-    this.apiService.getPokeJSON().subscribe((val)=>{
+    this.apiService.getPoke().subscribe((val)=>{
       let result : any =val;
       this.pokemon.name = result.results[0].name;
       this.pokemon.url = result.results[0].url;

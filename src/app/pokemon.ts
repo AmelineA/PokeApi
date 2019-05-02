@@ -1,8 +1,8 @@
 export class Pokemon {
     id: number;
     name: string;
-    url : string;
     favori : boolean;
+    picture: string;
 
     constructor() { }
 }

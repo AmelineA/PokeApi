@@ -7,11 +7,14 @@
 </ion-header>
 
 <ion-content>
-  <div *ngFor="let pokemon of pokemons">
-    <ion-card (click)="gotoDetail(pokemon)">
-      <p>{{ pokemon.name }}</p>
-      <p>{{ pokemon.url }}</p>  
+  <div class="ion-padding">
+    <ion-card *ngFor="let p of pokemons" (click)="getPokemonDetails(p)">
+      <ion-card-header>
+        {{p.name | uppercase}}
+      </ion-card-header>
+      <ion-card-content>
+        <ion-img [src]="p.picture"></ion-img>        
+      </ion-card-content>
     </ion-card>
   </div>
-  
 </ion-content>

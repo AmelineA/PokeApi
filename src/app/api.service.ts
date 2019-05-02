@@ -11,10 +11,20 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  
-  getPokeJSON(){
+  //récupère les infos d'un pokemon en particulier
+  getPoke(){
+    return this.http.get(this.apiUrl+"pokemon/1");
+  }
+
+  //récupère un liste de pokemons
+  getPokeList(){
     return this.http.get(this.apiUrl+"pokemon/");
   }
+
+  //récupérer les informations d'un pokemon à partir de son url depuis la liste
+  getPokeFromList(url: string){
+    return this.http.get(url);
+}
 
   
 }
