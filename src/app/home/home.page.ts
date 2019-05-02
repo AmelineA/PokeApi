@@ -4,7 +4,6 @@ import { Pokemon } from '../pokemon';
 import { Router } from '@angular/router';
 import { TransferDataService } from '../transfer-data.service';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -13,6 +12,7 @@ import { TransferDataService } from '../transfer-data.service';
 export class HomePage {
       
   pokemons: Array<Pokemon>; 
+  searchInput: string;
 
   /**
    *
@@ -22,13 +22,28 @@ export class HomePage {
     this.getPokemonList();
   }
 
+  //recuperer le détails d'un pokemon et renvoyer vers la page correspondante
   getPokemonDetails(pokemon: Pokemon){
         this.transferData.setData(pokemon);
         console.log(pokemon);
         this.router.navigate(["/poke-detail"]);
   }
   
+  //recupérer une liste de pokemon
+  getPokemonList(){
+    this.apiService.getPokeList().subscribe((val) => {
+      //récuperer le resultat
+      let result: any = val;
+      //récupérer le tableau d'informations du résultat
+      let results: any = result.results;
+      //pour chaque élément du tableau, récupérer les informations du pokemon
+      for(let p of results){
+       this.getPokemonFromList(p.url);
+      }
+    })
+  }
   
+  //recupérer chaque pokemon pour chaque ligne de la liste précédemment récupérée
   getPokemonFromList(url:string){
     this.apiService.getPokeFromList(url).subscribe((val) => {
       //récupérer le résultat
@@ -43,15 +58,15 @@ export class HomePage {
     })
   }
 
-  getPokemonList(){
-    this.apiService.getPokeList().subscribe((val) => {
-      //récuperer le resultat
+  searchPoke(){
+    this.apiService.getPokeByName(this.searchInput).subscribe((val) => {
       let result: any = val;
-      //récupérer le tableau d'informations du résultat
-      let results = result.results;
-      //pour chaque élément du tableau, récupérer les informations du pokemon
-      for(let p of results){
-       this.getPokemonFromList(p.url);
+      if(result.name != null){
+        let pokemon = new Pokemon();
+        pokemon.id = result.id;
+        pokemon.name = result.name;
+        pokemon.picture = result.picture;
+        this.getPokemonDetails(pokemon);
       }
     })
   }

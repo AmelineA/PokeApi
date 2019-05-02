@@ -16,6 +16,11 @@ export class ApiService {
     return this.http.get(this.apiUrl+"pokemon/1");
   }
 
+  //récupère un pokemon par son nom
+  getPokeByName(name: string){
+    return this.http.get(this.apiUrl+"pokemon/"+name);
+  }
+
   //récupère un liste de pokemons
   getPokeList(){
     return this.http.get(this.apiUrl+"pokemon/");
