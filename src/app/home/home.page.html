@@ -9,9 +9,9 @@
 <ion-content>
   <div *ngFor="let pokemon of pokemons">
     <ion-card (click)="gotoDetail(pokemon)">
-      <p>{{ pokemon.id }}</p>
-      <p>{{ pokemon.name }}</p>  
+      <p>{{ pokemon.name }}</p>
+      <p>{{ pokemon.url }}</p>  
     </ion-card>
   </div>
-  <ion-button (click)="getApi()">ClickMe</ion-button>
+  
 </ion-content>

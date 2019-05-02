@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
-<<<<<<< HEAD
-import { Pokemon } from '../pokemon';
-=======
->>>>>>> e0c4ab3246802d2642907da280de090e5eb5bdb1
 import { ApiService } from '../api.service';
+import { Pokemon } from '../pokemon';
 
 @Component({
   selector: 'app-home',
@@ -11,30 +8,32 @@ import { ApiService } from '../api.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-<<<<<<< HEAD
-  private pokemons: any[];
-  private pokemon: Pokemon;
-  
-
-  constructor(private apiService : ApiService) {
-   
-  }
-
-  ngOnInit() {
-    
-=======
       
 
-  /**
-   *
-   */
+  pokemons : Array<Pokemon>
+
   constructor(private apiService: ApiService) { 
   }
 
-  getApi(){
-    this.apiService.getPoke().subscribe((val) => {
-      console.log(JSON.stringify(val));
+  ngOnInit() {
+    this.get20Poke();
+  }
+
+  
+
+  get20Poke(){
+    this.apiService.getPokeJSON().subscribe((val) => {
+      let result : any = val;
+      
+      this.pokemons.forEach(pokemon => {
+        pokemon.name = result.result.name;
+        pokemon.url = result.result.url;
+      });
+      
     });
->>>>>>> e0c4ab3246802d2642907da280de090e5eb5bdb1
+  }
+
+  gotoDetail(pokemon : Pokemon){
+
   }
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../api.service';
 import { Pokemon } from '../pokemon';
+import { ApiService } from '../api.service';
+import { validateConfig } from '@angular/router/src/config';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-poke-detail',
@@ -9,22 +11,22 @@ import { Pokemon } from '../pokemon';
 })
 export class PokeDetailPage implements OnInit {
 
-  private storage:Storage;
-  private pokemon : Pokemon;
-  apiService: any;
+  pokemon = new Pokemon();
 
-  constructor(storage: Storage, apiService:ApiService) { 
-    this.storage = storage;
-    this.apiService.getPoke().subscribe((val) => {
-      let result: any = val;
-      console.log(result);//.results[0]);
-      // this.pokemon = result.results[0].id;
-      // this.pokemon = result.results[0].name;
-
-    })
+  constructor(private storage: Storage, private apiService : ApiService) { 
   }
 
   ngOnInit() {
+    this.getPoke();
   }
 
+  getPoke(){
+    this.apiService.getPokeJSON().subscribe((val)=>{
+      let result : any =val;
+      this.pokemon.name = result.results[0].name;
+      this.pokemon.url = result.results[0].url;
+      this.pokemon.favori = false;
+      console.log(this.pokemon);
+    })
+  }
 }
