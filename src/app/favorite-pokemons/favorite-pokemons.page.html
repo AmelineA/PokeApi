@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>favorite-pokemons</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding">
+    <ion-card *ngFor="let p of pokemons" (click)="getPokemonDetails(p)">
+      <ion-card-header>
+        {{p.name | uppercase}}
+      </ion-card-header>
+      <ion-card-content>
+        <ion-img [src]="p.picture"></ion-img>        
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
