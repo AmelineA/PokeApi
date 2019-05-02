@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-home',
@@ -7,4 +8,16 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
     
+
+  /**
+   *
+   */
+  constructor(private apiService: ApiService) { 
+  }
+
+  getApi(){
+    this.apiService.getPoke().subscribe((val) => {
+      console.log(JSON.stringify(val));
+    });
+  }
 }
