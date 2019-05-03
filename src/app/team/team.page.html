@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>team</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding" *ngFor="let p of pokemons">
+    <ion-card (click)="gotoDetail(p)">
+      <ion-card-header>
+        {{p.name | uppercase}}
+      </ion-card-header>
+  <!--    <ion-card-content>
+        <ion-img [src]="p.picture"></ion-img>        
+      </ion-card-content>         -->
+    </ion-card>
+    <ion-button (click)="unsetFromTeam(p)">Virer de l'équipe</ion-button>
+  </div>
+</ion-content>
