@@ -4,6 +4,7 @@ import { Pokemon } from '../pokemon';
 import { Router } from '@angular/router';
 import { TransferDataService } from '../transfer-data.service';
 import { FavoriteService } from '../favorite.service';
+import { TeamService } from '../team.service';
 
 
 @Component({
@@ -15,10 +16,8 @@ export class HomePage {
       
   pokemons: Array<Pokemon>; 
 
-  /**
-   *
-   */
-  constructor(private apiService: ApiService, private router: Router, private transferData: TransferDataService, private fav : FavoriteService) { 
+ 
+  constructor(private apiService: ApiService, private router: Router, private transferData: TransferDataService, private fav : FavoriteService, private tserv : TeamService) { 
     this.pokemons = new Array();
     this.getPokemonList();
   }
@@ -64,7 +63,12 @@ export class HomePage {
   }
 
   gotoFavorite(){
-    this.transferData.setData(this.fav.getFavoritePokemons());
+   // this.transferData.setData(this.fav.getFavoritePokemons());
     this.router.navigate(['/favorite-pokemons']);
+  }
+
+  gotoTeam(){
+    this.transferData.setData(this.tserv.getTeam());
+    this.router.navigate(['/team']);
   }
 }

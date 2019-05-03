@@ -7,9 +7,8 @@
 </ion-header>
 
 <ion-content>
-  <ion-button (click)="fav.getFavoritePokemons()">Display les favoris</ion-button>
-
   <ion-button (click)="gotoFavorite()">Voir les favoris</ion-button>
+  <ion-button (click)="gotoTeam()">Voir l'équipe</ion-button>
   <div class="ion-padding">
     <ion-card *ngFor="let p of pokemons" (click)="gotoDetail(p)">
       <ion-card-header>
