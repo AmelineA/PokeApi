@@ -6,7 +6,7 @@
 
 <ion-content>
   <div class="ion-padding">
-    <ion-card *ngFor="let p of pokemons" (click)="getPokemonDetails(p)">
+    <ion-card *ngFor="let p of pokemons" (click)="gotoDetail(p)">
       <ion-card-header>
         {{p.name | uppercase}}
       </ion-card-header>
