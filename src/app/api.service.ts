@@ -32,4 +32,9 @@ export class ApiService {
     return this.http.get(url);
   }
 
+  //récupérer la couleur principale du pokemon à partir de l'url des species
+  getPokeColor(url: string){
+    return this.http.get(url);
+  }
+
 }

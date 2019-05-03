@@ -5,6 +5,7 @@ export class Pokemon {
     picture: string;
     weight: string;
     height: string;
+    color: string;
 
     constructor() {
         this.favori = false;

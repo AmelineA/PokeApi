@@ -27,7 +27,6 @@ export class HomePage implements OnInit {
   //recuperer le détails d'un pokemon et renvoyer vers la page correspondante
   gotoDetail(pokemon: Pokemon){
         this.transferData.setData(pokemon);
-        console.log(this.transferData.getData());
         this.router.navigate(["/poke-detail"]);
   }
   
@@ -46,7 +45,7 @@ export class HomePage implements OnInit {
   }
   
   //recupérer chaque pokemon pour chaque ligne de la liste précédemment récupérée
-  getPokemonFromList(url:string){
+  getPokemonFromList(url: string){
     this.apiService.getPokeFromList(url).subscribe((val) => {
       //récupérer le résultat
       let result: any = val;
@@ -57,18 +56,28 @@ export class HomePage implements OnInit {
     })
   }
 
+  //rechercher un pokemon par son nom
   searchPoke(){
     this.apiService.getPokeByName(this.searchInput).subscribe((val) => {
       let result: any = val;
       
       if(result.name != null){
         let pokemon = this.getPokemon(result);
-        console.log(pokemon);
         this.gotoDetail(pokemon);
       }
     })
   }
 
+  //récuperer la couleur du pokemon à partir de son espèce
+  setPokeColor(url: string, pokemon:Pokemon){
+    this.apiService.getPokeColor(url).subscribe((val) => {
+      let result: any = val;
+      
+      pokemon.color = result.color.name;
+    })
+  }
+  
+  //récupérer un objet pokemon à partir du résultat renvoyé par l'api
   getPokemon(resultFromApi: any){
     let pokemon = new Pokemon();
     pokemon.id = resultFromApi.id;
@@ -76,6 +85,7 @@ export class HomePage implements OnInit {
     pokemon.picture = resultFromApi.sprites.front_default;
     pokemon.setWeight(resultFromApi.weight);
     pokemon.setHeight(resultFromApi.height);
+    this.setPokeColor(resultFromApi.species.url, pokemon);
     return pokemon;
   }
 }
