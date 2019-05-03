@@ -11,10 +11,14 @@ export class FavoritePokemonsPage implements OnInit {
 
   pokemons : Array<Pokemon>
 
-  constructor(private fav : FavoriteService) { }
+  constructor(private fav : FavoriteService) { 
+    this.pokemons = new Array();
+  }
 
   ngOnInit() {
-    this.pokemons = this.fav.getFavoritePokemons();
+    this.fav.getFavoritePokemons().then(val => {
+      this.pokemons = val;
+    });
   }
 
 

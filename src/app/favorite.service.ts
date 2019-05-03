@@ -8,19 +8,38 @@ import { Pokemon } from './pokemon';
 export class FavoriteService {
 
 
-  private favPokemons : Array<Pokemon>;
+  private favPokemons : Array<Pokemon> = [];
+  private list : string = "FAV";
 
-  constructor(private storage : Storage) { }
+  constructor(private storage : Storage) {
+    this.storage.set(this.list, this.favPokemons);
+   }
 
   addToFavorite(pokemon : Pokemon){
-    this.storage.set(pokemon.name, pokemon);
+    console.log("adding pokemon to favorite");
+    this.favPokemons.push(pokemon);
+    this.storage.set(this.list, this.favPokemons);
+//    this.getFavoritePokemons().push(pokemon);
+    console.log("nombre de pokemon dans les favoris : "+ this.favPokemons.length);
+    console.log("pokemon added to favorite")
+    console.log("Array of fav poke : " + JSON.stringify(this.favPokemons));
   }
 
   removeFromFavorite(pokemon : Pokemon){
-    this.storage.remove(pokemon.name);
+    console.log("removing pokemon from favorite");
+    let index= this.favPokemons.findIndex(p=>p.name==pokemon.name);
+    console.log("pokemon à supprimer : "+this.favPokemons[index]);
+    this.favPokemons.splice(index, 1);
+    this.storage.set(this.list, this.favPokemons);
+    console.log("nombre de pokemon dans les favoris : "+ this.favPokemons.length);
+    console.log("pokemon added to favorite")
   }
   
   getFavoritePokemons(){
-    return this.favPokemons;
+    console.log(this.favPokemons);
+    return this.storage.get(this.list);/*.then(val=>{
+      this.favPokemons=val;
+      console.log("getFav : " +  JSON.stringify(this.favPokemons));
+    })*/
   }
 }

@@ -3,6 +3,7 @@ import { ApiService } from '../api.service';
 import { Pokemon } from '../pokemon';
 import { Router } from '@angular/router';
 import { TransferDataService } from '../transfer-data.service';
+import { FavoriteService } from '../favorite.service';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class HomePage {
   /**
    *
    */
-  constructor(private apiService: ApiService, private router: Router, private transferData: TransferDataService) { 
+  constructor(private apiService: ApiService, private router: Router, private transferData: TransferDataService, private fav : FavoriteService) { 
     this.pokemons = new Array();
     this.getPokemonList();
   }
@@ -60,5 +61,10 @@ export class HomePage {
     this.transferData.setData(pokemon);
     console.log(this.transferData.getData());
     this.router.navigate(['/poke-detail']);
+  }
+
+  gotoFavorite(){
+    this.transferData.setData(this.fav.getFavoritePokemons());
+    this.router.navigate(['/favorite-pokemons']);
   }
 }
