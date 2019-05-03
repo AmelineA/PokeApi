@@ -8,6 +8,7 @@
 
 <ion-content>
   <ion-button (click)="gotoFavorite()">Voir les favoris</ion-button>
+  <ion-button (click)="gotoTeam()">Voir l'équipe</ion-button>
   <div class="ion-padding">
     <ion-searchbar [(ngModel)]="searchInput" (search)="searchPoke($event)"></ion-searchbar>
     <ion-card *ngFor="let p of pokemons" (click)="gotoDetail(p)">
