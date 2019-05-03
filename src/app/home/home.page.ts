@@ -4,6 +4,7 @@ import { Pokemon } from '../pokemon';
 import { Router } from '@angular/router';
 import { TransferDataService } from '../transfer-data.service';
 import { FavoriteService } from '../favorite.service';
+import { TeamService } from '../team.service';
 
 @Component({
   selector: 'app-home',
@@ -15,11 +16,7 @@ export class HomePage implements OnInit {
   pokemons: Array<Pokemon>; 
   searchInput: string;
 
-  /**
-   *
-   */
-
-constructor(private apiService: ApiService, private router: Router, private transferData: TransferDataService, private fav : FavoriteService) { }
+constructor(private apiService: ApiService, private router: Router, private transferData: TransferDataService, private fav : FavoriteService, private tserv : TeamService) { }
 
   ngOnInit() {
     this.pokemons = new Array();
@@ -92,7 +89,12 @@ constructor(private apiService: ApiService, private router: Router, private tran
   }
 
   gotoFavorite(){
-    this.transferData.setData(this.fav.getFavoritePokemons());
+   // this.transferData.setData(this.fav.getFavoritePokemons());
     this.router.navigate(['/favorite-pokemons']);
+  }
+
+  gotoTeam(){
+    this.transferData.setData(this.tserv.getTeam());
+    this.router.navigate(['/team']);
   }
 }
