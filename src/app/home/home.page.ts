@@ -51,10 +51,7 @@ export class HomePage implements OnInit {
       //récupérer le résultat
       let result: any = val;
       //nouveau pokemon à partir des données récupérées
-      let pokemon = new Pokemon();
-      pokemon.id = result.id;
-      pokemon.name = result.name;
-      pokemon.picture = result.sprites.front_default;
+      let pokemon = this.getPokemon(result);
       //ajouter le nouveau pokemon à la liste
       this.pokemons.push(pokemon);
     })
@@ -63,15 +60,22 @@ export class HomePage implements OnInit {
   searchPoke(){
     this.apiService.getPokeByName(this.searchInput).subscribe((val) => {
       let result: any = val;
+      
       if(result.name != null){
-        let pokemon = new Pokemon();
-        pokemon.id = result.id;
-        pokemon.name = result.name;
-        pokemon.picture = result.sprites.front_default;
+        let pokemon = this.getPokemon(result);
         console.log(pokemon);
         this.gotoDetail(pokemon);
       }
     })
   }
 
+  getPokemon(resultFromApi: any){
+    let pokemon = new Pokemon();
+    pokemon.id = resultFromApi.id;
+    pokemon.name = resultFromApi.name;
+    pokemon.picture = resultFromApi.sprites.front_default;
+    pokemon.setWeight(resultFromApi.weight);
+    pokemon.setHeight(resultFromApi.height);
+    return pokemon;
+  }
 }

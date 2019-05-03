@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import{ HttpClient } from '@angular/common/http';
+import { Pokemon } from './pokemon';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,6 @@ export class ApiService {
   //récupérer les informations d'un pokemon à partir de son url depuis la liste
   getPokeFromList(url: string){
     return this.http.get(url);
-}
+  }
 
-  
 }
