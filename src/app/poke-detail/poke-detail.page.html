@@ -12,16 +12,59 @@
 <ion-content>
   <ion-card>
     <ion-grid>
-      <ion-row justify-content-between>
-        <ion-col size="10"><div>{{ pokemon.name | uppercase }}</div></ion-col>
-        <ion-col size="2"><div>#{{ pokemon.id }}</div></ion-col>
+      <ion-row>
+        <ion-col size="9">
+          <ion-row>
+            <ion-col size="10"><div>{{ pokemon.name | uppercase }}</div></ion-col>
+            <ion-col size="2"><div>#{{ pokemon.id }}</div></ion-col>
+            <ion-col size="6">
+              <ion-chip>
+                <ion-label>{{pokemon.weight}} kg</ion-label>
+              </ion-chip>
+            </ion-col>
+            <ion-col>
+              <ion-chip>
+                <ion-label>{{pokemon.height}} m</ion-label>
+              </ion-chip>
+            </ion-col>
+          </ion-row>  
+        </ion-col>
+        <ion-col align-self-center>
+          <ion-button size="default" (click)="setFavorite(pokemon)">
+            <ion-icon name="star-outline" *ngIf="pokemon.favori == false"></ion-icon>
+            <ion-icon name="star" *ngIf="pokemon.favori == true"></ion-icon>
+          </ion-button>
+        </ion-col>
       </ion-row>
-      <ion-button size="default" (click)="setFavorite(pokemon)">
-        <ion-icon name="star-outline" *ngIf="pokemon.favori == false"></ion-icon>
-        <ion-icon name="star" *ngIf="pokemon.favori == true"></ion-icon>
-      </ion-button>
     </ion-grid>
   </ion-card>
+    <!-- <ion-grid>
+      <ion-row justify-content-between>
+        <ion-col size="7"><div>{{ pokemon.name | uppercase }}</div></ion-col>
+        <ion-col size="2"><div>#{{ pokemon.id }}</div></ion-col>
+        <ion-button size="default" (click)="setFavorite(pokemon)">
+          <ion-icon name="star-outline" *ngIf="pokemon.favori == false"></ion-icon>
+          <ion-icon name="star" *ngIf="pokemon.favori == true"></ion-icon>
+        </ion-button>
+      </ion-row>
+    </ion-grid> -->
+  <!-- </ion-card>
+  <ion-card>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-chip>
+            <ion-label>{{pokemon.weight}} kg</ion-label>
+          </ion-chip>
+        </ion-col>
+        <ion-col>
+          <ion-chip>
+            <ion-label>{{pokemon.height}} m</ion-label>
+          </ion-chip>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card> -->
   <ion-card>
       <ion-img [src]="pokemon.picture"></ion-img>
   </ion-card>
