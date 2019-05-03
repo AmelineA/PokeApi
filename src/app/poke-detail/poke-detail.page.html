@@ -1,13 +1,28 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>PokeDetail</ion-title>
+    <ion-grid>
+      <ion-row>
+        <ion-title>PokeDetail</ion-title>
+        <ion-button (click)="home()">Home</ion-button>
+      </ion-row>
+    </ion-grid>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <label>id : </label><p>{{ pokemon.id }}</p>
-  <label>nom : </label><p>{{ pokemon.name }}</p>
-  <label>favori : </label><p>{{ pokemon.favori }}</p>
-  <ion-button (click)="setFavorite(pokemon)">Mettre en favori</ion-button>
-  <ion-img [src]="pokemon.picture"></ion-img>
+  <ion-card>
+    <ion-grid>
+      <ion-row justify-content-between>
+        <ion-col size="10"><div>{{ pokemon.name | uppercase }}</div></ion-col>
+        <ion-col size="2"><div>#{{ pokemon.id }}</div></ion-col>
+      </ion-row>
+      <ion-button size="default" (click)="setFavorite(pokemon)">
+        <ion-icon name="star-outline" *ngIf="pokemon.favori == false"></ion-icon>
+        <ion-icon name="star" *ngIf="pokemon.favori == true"></ion-icon>
+      </ion-button>
+    </ion-grid>
+  </ion-card>
+  <ion-card>
+      <ion-img [src]="pokemon.picture"></ion-img>
+  </ion-card>
 </ion-content>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Pokemon } from '../pokemon';
 import { Router } from '@angular/router';
@@ -9,7 +9,7 @@ import { TransferDataService } from '../transfer-data.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
       
   pokemons: Array<Pokemon>; 
   searchInput: string;
@@ -17,13 +17,15 @@ export class HomePage {
   /**
    *
    */
-  constructor(private apiService: ApiService, private router: Router, private transferData: TransferDataService) { 
+  constructor(private apiService: ApiService, private router: Router, private transferData: TransferDataService) { }
+
+  ngOnInit() {
     this.pokemons = new Array();
     this.getPokemonList();
   }
 
   //recuperer le détails d'un pokemon et renvoyer vers la page correspondante
-  getPokemonDetails(pokemon: Pokemon){
+  gotoDetail(pokemon: Pokemon){
         this.transferData.setData(pokemon);
         console.log(this.transferData.getData());
         this.router.navigate(["/poke-detail"]);
@@ -65,15 +67,11 @@ export class HomePage {
         let pokemon = new Pokemon();
         pokemon.id = result.id;
         pokemon.name = result.name;
-        pokemon.picture = result.picture;
-        this.getPokemonDetails(pokemon);
+        pokemon.picture = result.sprites.front_default;
+        console.log(pokemon);
+        this.gotoDetail(pokemon);
       }
     })
   }
 
-  gotoDetail(pokemon : Pokemon){
-    this.transferData.setData(pokemon);
-    console.log(this.transferData.getData());
-    this.router.navigate(['/poke-detail']);
-  }
 }

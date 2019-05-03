@@ -4,5 +4,7 @@ export class Pokemon {
     favori : boolean;
     picture: string;
 
-    constructor() { }
+    constructor() {
+        this.favori = false;
+     }
 }
